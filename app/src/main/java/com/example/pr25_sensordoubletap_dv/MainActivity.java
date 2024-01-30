@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final Context context = this;
+
         x = findViewById(R.id.x);
         y = findViewById(R.id.y);
         z = findViewById(R.id.z);
@@ -32,14 +34,13 @@ public class MainActivity extends AppCompatActivity {
         sensorListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent sensorEvent) {
-                // Valors de l'acceleròmetre en m/s^2
                 float xAcc = sensorEvent.values[0];
                 float yAcc = sensorEvent.values[1];
                 float zAcc = sensorEvent.values[2];
 
-                x.setText("X:  "+xAcc);
-                y.setText("Y:  "+yAcc);
-                z.setText("Z:  "+zAcc);
+                x.setText(Float.toString(xAcc));
+                y.setText(Float.toString(yAcc));
+                z.setText(Float.toString(zAcc));
             }
 
             @Override
@@ -58,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
 
-        //Per double tap
-        final Context context = this;
         final GestureDetector.SimpleOnGestureListener listener = new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onDoubleTap(MotionEvent e) {
